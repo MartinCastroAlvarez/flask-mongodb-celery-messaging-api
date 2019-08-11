@@ -1,0 +1,109 @@
+version: '3'
+
+services:
+
+    # Web Server.
+    web-server:
+        build: "."
+        restart: "always"
+        volumes:
+            - "./app:/app"
+        depends_on:
+            - "nosql-server"
+            - "cache-server"
+            # - "worker-job"
+        links:
+            - "nosql-server:nosql-server"
+            - "cache-server:cache-server"
+        ports:
+            - "8080:80"
+        environment:
+            DEBUG: "true"
+            SECRET: "894891h24h1289h98ahs98hdfhahs8i1892381"
+            # Security configuration:
+            SALT: 'JDJiJDEyJFhIOUVzRVhoVU5WMFRlcUVaVTIwSWU='
+            JWT_HEADER_NAME: 'Authorization'
+            # Administrator User.
+            ADMIN_USER: "daikiri"
+            ADMIN_PASS: "tekila"
+            # Cache Server.
+            CACHE_HOST: "cache-server"
+            CACHE_PORT: "6379"
+            CACHE_PASS: "whiskey"
+            CACHE_NAME: "0"
+            # MongoDB Server.
+            MONGO_NAME: "cubalibre"
+            MONGO_HOST: "nosql-server"
+            MONGO_PORT: "27017"
+            MONGO_USER: "vodka"
+            MONGO_PASS: "wine"
+
+    # Worker #1
+    worker-1:
+        build: "."
+        entrypoint: "celery"
+        command: "-A app.worker.run.celery --loglevel=debug worker"
+        restart: "always"
+        volumes:
+            - "./app:/app"
+        depends_on:
+            - "nosql-server"
+            - "cache-server"
+        links:
+            - "nosql-server:nosql-server"
+            - "cache-server:cache-server"
+        environment:
+            DEBUG: "true"
+            SECRET: "894891h24h1289h98ahs98hdfhahs8i1892381"
+            # Security configuration:
+            SALT: 'JDJiJDEyJFhIOUVzRVhoVU5WMFRlcUVaVTIwSWU='
+            JWT_HEADER_NAME: 'Authorization'
+            # Cache Server.
+            CACHE_HOST: "cache-server"
+            CACHE_PORT: "6379"
+            CACHE_PASS: "whiskey"
+            CACHE_NAME: "0"
+            # MongoDB Server.
+            MONGO_NAME: "cubalibre"
+            MONGO_HOST: "nosql-server"
+            MONGO_PORT: "27017"
+            MONGO_USER: "vodka"
+            MONGO_PASS: "wine"
+
+    # Cache server.
+    cache-server:
+        image: "redis:5.0.5"
+        restart: "always"
+        command: "redis-server --requirepass whiskey"
+        ports:
+            - "6379:6379"
+
+    # Database Server.
+    nosql-server:
+        image: "aashreys/mongo-auth:latest"
+        restart: "always"
+        environment:
+            AUTH: "yes"
+            MONGODB_ADMIN_USER: "rum"
+            MONGODB_ADMIN_PASS: "martini"
+            MONGODB_APPLICATION_DATABASE: "cubalibre"
+            MONGODB_APPLICATION_USER: "vodka"
+            MONGODB_APPLICATION_PASS: "wine"
+        ports:
+            - "27017:27017"
+
+volumes:
+
+    # Flask app.
+    app:
+        driver: "local"
+        driver_opts:
+            type: "bind"
+            device: "/app"
+
+    # Mongo scripts.
+    mongo:
+        driver: "local"
+        driver_opts:
+            type: "bind"
+            device: "docker-entrypoint-initdb.d"
