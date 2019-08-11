@@ -12,7 +12,6 @@ Chat server using Flask, MongoDB, Redis and Celery.
 - [Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/docker.html)
 - [Flask REST API](https://flask-restful.readthedocs.io/en/latest/)
 - [Redis connector with Flask](https://pypi.org/project/flask-redis/)
-- [MongoDB connector with Flask](pip install Flask-PyMongo)
 - [Embedded documents with Mongo Engine](https://stackoverflow.com/questions/27846322)
 - [DockerHub Celery](https://hub.docker.com/_/celery)
 - [DockerHub MongoDB](https://hub.docker.com/_/mongo)
