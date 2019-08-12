@@ -138,6 +138,53 @@ nosetests \
     --cover-package ./app \
     ./tests
 ```
+You should expect something like this:
+```bash
+Name                               Stmts   Miss  Cover
+------------------------------------------------------
+app/__init__.py                       46      9    80%
+app/api/__init__.py                   12      0   100%
+app/api/auth.py                       19      0   100%
+app/api/health.py                     15      0   100%
+app/api/messages.py                   27      3    89%
+app/api/notifications.py              17      0   100%
+app/api/users.py                      27      3    89%
+app/config.py                         34      0   100%
+app/controllers/__init__.py           28     12    57%
+app/controllers/health.py             31     16    48%
+app/controllers/messages.py           65     38    42%
+app/controllers/notifications.py      44     23    48%
+app/controllers/users.py              68     44    35%
+app/exceptions/__init__.py            20      0   100%
+app/exceptions/auth.py                13      0   100%
+app/exceptions/form.py                61      0   100%
+app/exceptions/health.py               8      0   100%
+app/exceptions/not_found.py            7      0   100%
+app/main.py                            4      4     0%
+app/models/__init__.py                 2      0   100%
+app/models/message.py                 41      1    98%
+app/models/notification.py            17      2    88%
+app/models/user.py                    19      1    95%
+app/security/__init__.py               0      0   100%
+app/security/encryption.py            21      9    57%
+app/security/login.py                 17      6    65%
+app/validations/__init__.py            6      2    67%
+app/validations/messages.py           61     31    49%
+app/validations/notifications.py      28     13    54%
+app/validations/pagination.py         11      5    55%
+app/validations/users.py              27     12    56%
+app/worker/__init__.py                 3      0   100%
+app/worker/main.py                     3      3     0%
+app/worker/messages.py                18      8    56%
+app/worker/tasks.py                    5      0   100%
+app/worker/users.py                   18      8    56%
+------------------------------------------------------
+TOTAL                                843    253    70%
+----------------------------------------------------------------------
+Ran 12 tests in 0.138s
+
+OK
+```
 
 #### Tear Down
 You can stop the services using this command:
