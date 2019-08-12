@@ -33,6 +33,7 @@ class TestMessagesApi(TestPrivateApi):
         response = self.client.get("/messages", headers=self.headers).get_json()
         self.assertEqual(response['messages'][0], message1.to_json())
         self.assertEqual(response['messages'][1], message2.to_json())
+        controller.assert_called_once()
 
     @attr(unit_test=True)
     @patch('app.controllers.messages.MessagesController.search')
@@ -44,6 +45,7 @@ class TestMessagesApi(TestPrivateApi):
         controller.side_effect = error
         response = self.client.get("/messages", headers=self.headers).get_json()
         self.assertEqual(response, error.to_json())
+        controller.assert_called_once()
 
     @attr(unit_test=True)
     @patch('app.worker.tasks.AsyncSendMessageTask.delay')
@@ -54,3 +56,4 @@ class TestMessagesApi(TestPrivateApi):
         task.return_value = MagicMock(id="912093091")
         response = self.client.post("/messages", headers=self.headers).get_json()
         self.assertEqual(response["job_id"], "912093091")
+        task.assert_called_once()

@@ -30,6 +30,7 @@ class TestUsersApi(TestPrivateApi):
         response = self.client.get("/users", headers=self.headers).get_json()
         self.assertEqual(response['users'][0], user1.to_json())
         self.assertEqual(response['users'][1], user2.to_json())
+        controller.assert_called_once()
 
     @attr(unit_test=True)
     @patch('app.controllers.users.UsersController.search')
@@ -41,6 +42,7 @@ class TestUsersApi(TestPrivateApi):
         controller.side_effect = error
         response = self.client.get("/users", headers=self.headers).get_json()
         self.assertEqual(response, error.to_json())
+        controller.assert_called_once()
 
     @attr(unit_test=True)
     @patch('app.worker.tasks.AsyncCreateUserTask.delay')
@@ -51,3 +53,4 @@ class TestUsersApi(TestPrivateApi):
         task.return_value = MagicMock(id="1892398182")
         response = self.client.post("/users", headers=self.headers).get_json()
         self.assertEqual(response["job_id"], "1892398182")
+        task.assert_called_once()

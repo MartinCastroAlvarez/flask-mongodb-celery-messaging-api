@@ -23,6 +23,7 @@ class TestHealthApi(TestPublicApi):
         controller.return_value = {"status": "ok"}
         response = self.client.post("/health").get_json()
         self.assertEqual(response, controller.return_value)
+        controller.assert_called_once()
 
     @attr(unit_test=True)
     @patch('app.controllers.health.HealthController.check')
@@ -34,3 +35,4 @@ class TestHealthApi(TestPublicApi):
         controller.side_effect = error
         response = self.client.post("/health").get_json()
         self.assertEqual(response, error.to_json())
+        controller.assert_called_once()

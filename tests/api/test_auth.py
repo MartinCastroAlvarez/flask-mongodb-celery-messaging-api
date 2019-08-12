@@ -30,6 +30,7 @@ class TestAuthApi(TestPublicApi):
         self.assertIn("refresh-token", response)
         self.assertIn(user.username, response)
         self.assertIn(user.password, response)
+        controller.assert_called_once()
 
     @attr(unit_test=True)
     @patch('app.controllers.users.UsersController.login')
@@ -41,3 +42,4 @@ class TestAuthApi(TestPublicApi):
         controller.side_effect = error
         response = self.client.post("/login").get_json()
         self.assertEqual(response, error.to_json())
+        controller.assert_called_once()

@@ -27,6 +27,7 @@ class TestNotificationsApi(TestPrivateApi):
         response = self.client.get("/notifications", headers=self.headers).get_json()
         self.assertEqual(response['notifications'][0], notification1)
         self.assertEqual(response['notifications'][1], notification2)
+        controller.assert_called_once()
 
     @attr(unit_test=True)
     @patch('app.controllers.notifications.NotificationsController.search_mine')
@@ -38,3 +39,4 @@ class TestNotificationsApi(TestPrivateApi):
         controller.side_effect = error
         response = self.client.get("/notifications", headers=self.headers).get_json()
         self.assertEqual(response, error.to_json())
+        controller.assert_called_once()
