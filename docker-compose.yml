@@ -42,7 +42,7 @@ services:
     worker-1:
         build: "."
         entrypoint: "celery"
-        command: "-A app.worker.run.celery --loglevel=debug worker"
+        command: "-A app.worker.main.celery --loglevel=debug worker"
         restart: "always"
         volumes:
             - "./app:/app"

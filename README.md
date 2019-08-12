@@ -56,8 +56,7 @@ Run all the services:
 sudo docker-compose up \
     --detach \
     --build \
-    --renew-anon-volumes \
-    --abort-on-container-exit
+    --renew-anon-volumes
 ```
 
 #### Health Checks
@@ -126,7 +125,19 @@ sudo docker logs iguazu_web-worker_1 --follow --tail 100
 ```
 
 ####t Unit Tests
-IN PROGRESS
+Execute this command to run Unit Tests:
+```bash
+export PYTHONPATH="$PYTHONPATH:$(pwd)"
+nosetests \
+    --cover-min-percentage 20 \
+    --logging-level=DEBUG \
+    -a "unit_test=true" \
+    --with-coverage \
+    --cover-erase \
+    --detailed-errors \
+    --cover-package ./app \
+    ./tests
+```
 
 #### Tear Down
 You can stop the services using this command:

@@ -6,7 +6,7 @@ import os
 import logging
 
 DEBUG = os.environ.get("DEBUG", "")
-SECRET = os.environ.get("SECRET", "")
+SECRET = os.environ.get("SECRET", "default-secret-key")
 
 ADMIN_USER = os.environ.get("ADMIN_USER", "")
 ADMIN_PASS = os.environ.get("ADMIN_PASS", "")
@@ -39,7 +39,7 @@ LOG_FORMAT = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 LOG_LEVEL = logging.DEBUG if DEBUG else logging.INFO
 
 JWT_HEADER_NAME = os.environ.get('JWT_HEADER_NAME', 'Authorization')
-SALT = os.environ.get("SALT", "")
+SALT = os.environ.get("SALT", "default-salt-key")
 ENCODING = "utf-8"
 TOKEN_HEADER = "Authorization"
 PASSWORD_FIXED_COMPARISSON_TIME = (0, 3)
@@ -47,3 +47,7 @@ ENCRYPTION_ALGORITHM = "HS256"
 
 CACHE_USER = 100
 CACHE_TOKEN = 10
+
+RUNSERVER_PORT = "8080"
+RUNSERVER_HOST = "host"
+RUNSERVER_DEBUG = True
