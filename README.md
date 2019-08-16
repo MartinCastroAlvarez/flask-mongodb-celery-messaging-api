@@ -124,7 +124,7 @@ sudo docker logs iguazu_web-server_1 --follow --tail 100
 sudo docker logs iguazu_web-worker_1 --follow --tail 100
 ```
 
-##### Unit Tests
+#### Unit Tests
 Execute this command to run Unit Tests:
 ```bash
 export PYTHONPATH="$PYTHONPATH:$(pwd)"
