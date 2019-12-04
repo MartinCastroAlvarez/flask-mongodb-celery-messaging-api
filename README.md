@@ -7,7 +7,7 @@ Chat server using Flask, MongoDB, Redis and Celery.
 - [Celery official documentation](https://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html)
 - [Class-based tasks with Celery](https://stackoverflow.com/questions/41788017/register-celery-class-based-task)
 - [Redis with Flask](https://redis-py.readthedocs.io/en/latest/)
-- [JWT with Flask](https://codeburst.io/jwt-authorization-in-flask-c63c1acf4eebfrom flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+- [JWT with Flask](https://codeburst.io/jwt-authorization-in-flask-c63c1acf4eeb)
 - [Bcrypt with Python](https://blog.ruanbekker.com/blog/2018/07/04/salt-and-hash-example-using-python-with-bcrypt-on-alpine/)
 - [Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/docker.html)
 - [Flask REST API](https://flask-restful.readthedocs.io/en/latest/)
