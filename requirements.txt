@@ -37,7 +37,7 @@ pika==1.1.0
 pycodestyle==2.5.0
 pycparser==2.19
 pyflakes==2.1.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.3.1
 pymongo==3.8.0
 pytz==2019.2
